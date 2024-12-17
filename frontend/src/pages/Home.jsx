@@ -24,14 +24,19 @@ const Home = () => {
   };
 
   const deleteNote = (id) => {
+    setNotes(notes.filter((note) => note.id !== id));
     api
         .delete(`/api/notes/delete/${id}/`)
         .then((res) => {
             if (res.status === 204) alert("Note deleted!");
             else alert("Failed to delete note.");
-            getNotes();
+            
         })
-        .catch((error) => alert(error));
+        .catch((error) =>{ 
+          alert(error)
+          getNotes();
+        
+        });
   };
 
   const createNote = (e) => {
@@ -40,7 +45,11 @@ const Home = () => {
     api
         .post("/api/notes/", { content, title })
         .then((res) => {
-            if (res.status === 201) alert("Note created!");
+            if (res.status === 201){
+              alert("Note created!");
+              setContent("");
+              setTitle("");
+            } 
             else alert("Failed to make note.");
             getNotes();
         })
