@@ -19,12 +19,11 @@ function ProtectedRoute({children}){
                 setIsAuthorized(true)
             }else {
                 setIsAuthorized(false)
-                localStorage.removeItem(REFRESH_TOKEN);
-                localStorage.removeItem(ACCESS_TOKEN);
+                // localStorage.removeItem(REFRESH_TOKEN);
+                // localStorage.removeItem(ACCESS_TOKEN);
             }
         }catch(error){
             console.log(error);
-            
             setIsAuthorized(false)
         }
     }
